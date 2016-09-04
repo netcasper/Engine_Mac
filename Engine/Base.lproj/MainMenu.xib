@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="Voe-Tx-rLC" id="GzC-gU-4Uq"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Engine" customModuleProvider="target">
+            <connections>
+                <outlet property="item000001" destination="pXj-u2-yxZ" id="1Vc-ew-qsh"/>
+                <outlet property="item159915" destination="w5G-uW-9ef" id="jnq-9U-GTG"/>
+                <outlet property="item510050" destination="NEd-80-JcJ" id="63L-0h-TFg"/>
+                <outlet property="itemAmount" destination="pmw-z1-kRb" id="4v4-V6-a4d"/>
+                <outlet property="itemPause" destination="PDB-85-McS" id="puR-KE-GwM"/>
+                <outlet property="itemPrice" destination="QAX-RG-pwp" id="fxa-bo-7Kh"/>
+                <outlet property="itemRatio" destination="xye-xw-C3v" id="9li-ob-Op3"/>
+                <outlet property="statusMenu" destination="MYJ-mT-OGX" id="0Bp-yr-avC"/>
+            </connections>
+        </customObject>
+        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <menu id="MYJ-mT-OGX">
+            <items>
+                <menuItem title="Pause" id="PDB-85-McS">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="togglePause:" target="Voe-Tx-rLC" id="pxT-vD-0Up"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="F0b-Hv-df7"/>
+                <menuItem title="159915" id="w5G-uW-9ef">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="toggle159915:" target="Voe-Tx-rLC" id="gVZ-OC-FwX"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="000001" state="on" id="pXj-u2-yxZ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="toggle000001:" target="Voe-Tx-rLC" id="V8j-9b-I8n"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="510050" state="on" id="NEd-80-JcJ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="toggle510050:" target="Voe-Tx-rLC" id="aOg-bl-qTj"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="pPu-rp-VTL"/>
+                <menuItem title="Price" state="on" id="QAX-RG-pwp">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="togglePrice:" target="Voe-Tx-rLC" id="RCo-6f-b1F"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Ratio" state="on" id="xye-xw-C3v">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="toggleRatio:" target="Voe-Tx-rLC" id="ztb-kG-Ci1"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Amount" id="pmw-z1-kRb">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="toggleAmount:" target="Voe-Tx-rLC" id="VXe-ve-AmU"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="7eY-W5-Ej6"/>
+                <menuItem title="Quit" id="iAv-yC-Hz2">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="quitApplication:" target="Voe-Tx-rLC" id="tFd-4r-VIh"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-16.5" y="506.5"/>
+        </menu>
+    </objects>
+</document>
