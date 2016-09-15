@@ -11,12 +11,12 @@ import Foundation
 class DataRetriever {
     var output = "Engine"
     
-    func RetrieveData(source: String, items: [String]) {
+    func RetrieveData(_ source: String, items: [String]) {
         var requestString = AppConst.XL_URL;    // http://hq.sinajs.cn/list=
         for item in items {
-            if !item.isEmpty && item.lengthOfBytesUsingEncoding(NSWindowsCP1250StringEncoding) > 0 {
-                if item.substringToIndex(item.startIndex.advancedBy(1)) == AppConst.SH_STOCK_PREFIX
-                    || item.substringToIndex(item.startIndex.advancedBy(1)) == AppConst.SH_ETF_PREFIX
+            if !item.isEmpty && item.lengthOfBytes(using: String.Encoding.windowsCP1250) > 0 {
+                if item.substring(to: item.characters.index(item.startIndex, offsetBy: 1)) == AppConst.SH_STOCK_PREFIX
+                    || item.substring(to: item.characters.index(item.startIndex, offsetBy: 1)) == AppConst.SH_ETF_PREFIX
                     || item == AppConst.SHZS {
                     requestString += AppConst.XL_LONG_PREFIX_SH + item + AppConst.XL_ITEM_SEPARATOR
                 } else {
@@ -25,19 +25,19 @@ class DataRetriever {
             }
         }
         
-        let url = NSURL(string: requestString)
-        let request = NSURLRequest(URL: url!)
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
-        let task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) in
+        let url = URL(string: requestString)
+        let request = URLRequest(url: url!)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
             if let error = error {
                 print(error)
             } else if let data = data,
-                let string = String(data: data, encoding: NSWindowsCP1250StringEncoding) {
+                let string = String(data: data, encoding: String.Encoding.windowsCP1250) {
                 self.output = string
-                print("DataRetriever: self.output = " + string.substringToIndex(string.startIndex.advancedBy(20)))
+                print("DataRetriever: self.output = " + string.substring(to: string.characters.index(string.startIndex, offsetBy: 20)))
             }
-        })
+        } as! (Data?, URLResponse?, Error?) -> Void)
         task.resume()
     }
 

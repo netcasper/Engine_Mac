@@ -9,10 +9,10 @@
 import Foundation
 
 class DataFormatter {
-    func FormatData(items: [DataItem], settings: AppSettings)-> String {
+    func FormatData(_ items: [DataItem], settings: AppSettings)-> String {
         var output = ""
-        let charsetFieldSeparator = NSCharacterSet(charactersInString: "/")
-        let charsetItemSeparator = NSCharacterSet(charactersInString: " | ")
+        let charsetFieldSeparator = CharacterSet(charactersIn: "/")
+        let charsetItemSeparator = CharacterSet(charactersIn: " | ")
         print("DataFormatter: items.count = " + String(items.count))
         if items.count == 0 {
             return "Error"
@@ -31,10 +31,10 @@ class DataFormatter {
                 output = output + items[i].amount
                 output = output + "/"
             }
-            output = output.stringByTrimmingCharactersInSet(charsetFieldSeparator)
+            output = output.trimmingCharacters(in: charsetFieldSeparator)
             output = output + " | "
         }
         
-        return output.stringByTrimmingCharactersInSet(charsetItemSeparator)
+        return output.trimmingCharacters(in: charsetItemSeparator)
     }
 }

@@ -9,28 +9,28 @@
 import Foundation
 
 class DataParser {
-    func ParseData(input: String)->[DataItem] {
+    func ParseData(_ input: String)->[DataItem] {
         var output = [DataItem]()
         
         if input.isEmpty {
             return output
         }
         
-        let charset1 = NSCharacterSet(charactersInString: "\n")
-        let charset2 = NSCharacterSet(charactersInString: ";")
-        let temp = input.stringByTrimmingCharactersInSet(charset1)
-        let items = temp.stringByTrimmingCharactersInSet(charset2).componentsSeparatedByString(";")
+        let charset1 = CharacterSet(charactersIn: "\n")
+        let charset2 = CharacterSet(charactersIn: ";")
+        let temp = input.trimmingCharacters(in: charset1)
+        let items = temp.trimmingCharacters(in: charset2).components(separatedBy: ";")
         
         for item in items {
             let outputItem = DataItem()
-            var valuableParts = item.componentsSeparatedByString("=")
+            var valuableParts = item.components(separatedBy: "=")
             if valuableParts.count == 2 {
                 let header = valuableParts[0]
                 if header.characters.count == 19 {
                     //outputItem.code = header.substringFromIndex(header.endIndex.advancedBy(6))
                 }
                 
-                var fields = valuableParts[1].stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "\"")).componentsSeparatedByString(",")
+                var fields = valuableParts[1].trimmingCharacters(in: CharacterSet(charactersIn: "\"")).components(separatedBy: ",")
                 
                 if fields.count == 33 {
                     outputItem.name = fields[0]
@@ -48,7 +48,7 @@ class DataParser {
         return output
     }
     
-    func GetRatio(last: String, price: String) -> String {
+    func GetRatio(_ last: String, price: String) -> String {
         let lastFloat = (last as NSString).floatValue
         let priceFloat = (price as NSString).floatValue
         
@@ -60,7 +60,7 @@ class DataParser {
         }
     }
     
-    func FormatPrice(price: String) -> String {
+    func FormatPrice(_ price: String) -> String {
         let priceFloat = (price as NSString).floatValue
         if priceFloat > 9.99 {
             return String(format: "%.2f", priceFloat)

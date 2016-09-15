@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var statusMenu: NSMenu!
     
-    let statusBar = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
+    let statusBar = NSStatusBar.system().statusItem(withLength: -1)
     
     var appSettings = AppSettings()
     var dataRetriever = DataRetriever()
@@ -29,19 +29,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var dataFormatter = DataFormatter()
     var paused = false
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Setup status menu and defaul content
         statusBar.title = AppConst.DEFAULT_TITLE
         statusBar.menu = statusMenu
         
         // Update menu items
-        itemPause.state = Int(appSettings.pause)
-        item159915.state = Int(appSettings.show159915)
-        item000001.state = Int(appSettings.show000001)
-        item510050.state = Int(appSettings.show510050)
-        itemPrice.state = Int(appSettings.showPrice)
-        itemRatio.state = Int(appSettings.showRatio)
-        itemAmount.state = Int(appSettings.showAmount)
+        itemPause.state = appSettings.pause ? 1 : 0
+        item159915.state = appSettings.show159915 ? 1 : 0
+        item000001.state = appSettings.show000001 ? 1 : 0
+        item510050.state = appSettings.show510050 ? 1 : 0
+        itemPrice.state = appSettings.showPrice ? 1 : 0
+        itemRatio.state = appSettings.showRatio ? 1 : 0
+        itemAmount.state = appSettings.showAmount ? 1 : 0
         
         // Update status bar content
         appSettings.UpdateList()
@@ -50,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         sleep(UInt32(AppConst.INTERVAL))
         
         // Start loop
-        NSTimer.scheduledTimerWithTimeInterval(AppConst.INTERVAL, target: self, selector: #selector(AppDelegate.tick), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: AppConst.INTERVAL, target: self, selector: #selector(AppDelegate.tick), userInfo: nil, repeats: true)
     }
     
     func tick() {
@@ -72,75 +72,75 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func checkDateTime() -> Bool {
         return true // TODO: in problem. need to dig into
-        let dc = NSDateComponents()
+        let dc = DateComponents()
         
-        print(String(format:"%d", dc.weekday))
-        print(String(format:"%d", dc.hour))
-        print(String(format:"%d", dc.minute))
+        print(String(format:"%d", dc.weekday!))
+        print(String(format:"%d", dc.hour!))
+        print(String(format:"%d", dc.minute!))
         
         if dc.weekday == 6 || dc.weekday == 7 {
             return false
-        } else if dc.hour < 9 || dc.hour > 15 {
+        } else if dc.hour! < 9 || dc.hour! > 15 {
             return false
-        } else if dc.hour == 9 && dc.minute < 10 {
+        } else if dc.hour! == 9 && dc.minute! < 10 {
             return false
-        } else if dc.hour == 15 && dc.minute > 5 {
+        } else if dc.hour! == 15 && dc.minute! > 5 {
             return false
-        } else if dc.hour == 11 && dc.minute > 35 {
+        } else if dc.hour! == 11 && dc.minute! > 35 {
             return false
-        } else if dc.hour == 12 && dc.minute < 55 {
+        } else if dc.hour! == 12 && dc.minute! < 55 {
             return false
         } else {
             return true
         }
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
     
-    @IBAction func togglePause(sender: AnyObject) {
+    @IBAction func togglePause(_ sender: AnyObject) {
         appSettings.pause = !appSettings.pause
-        itemPause.state = Int(appSettings.pause)
+        itemPause.state = appSettings.pause ? 1 : 0
     }
     
-    @IBAction func toggle159915(sender: NSMenuItem) {
+    @IBAction func toggle159915(_ sender: NSMenuItem) {
         appSettings.show159915 = !appSettings.show159915
         appSettings.UpdateList()
-        item159915.state = Int(appSettings.show159915)
+        item159915.state = appSettings.show159915 ? 1 : 0
     }
     
     
-    @IBAction func toggle000001(sender: NSMenuItem) {
+    @IBAction func toggle000001(_ sender: NSMenuItem) {
         appSettings.show000001 = !appSettings.show000001
         appSettings.UpdateList()
-        item000001.state = Int(appSettings.show000001)
+        item000001.state = appSettings.show000001 ? 1 : 0
     }
     
-    @IBAction func toggle510050(sender: NSMenuItem) {
+    @IBAction func toggle510050(_ sender: NSMenuItem) {
         appSettings.show510050 = !appSettings.show510050
         appSettings.UpdateList()
-        item510050.state = Int(appSettings.show510050)
+        item510050.state = appSettings.show510050 ? 1 : 0
     }
     
     
-    @IBAction func togglePrice(sender: NSMenuItem) {
+    @IBAction func togglePrice(_ sender: NSMenuItem) {
         appSettings.showPrice = !appSettings.showPrice
-        itemPrice.state = Int(appSettings.showPrice)
+        itemPrice.state = appSettings.showPrice ? 1 : 0
     }
     
-    @IBAction func toggleRatio(sender: NSMenuItem) {
+    @IBAction func toggleRatio(_ sender: NSMenuItem) {
         appSettings.showRatio = !appSettings.showRatio
-        itemRatio.state = Int(appSettings.showRatio)
+        itemRatio.state = appSettings.showRatio ? 1 : 0
     }
     
-    @IBAction func toggleAmount(sender: NSMenuItem) {
+    @IBAction func toggleAmount(_ sender: NSMenuItem) {
         appSettings.showAmount = !appSettings.showAmount
-        itemAmount.state = Int(appSettings.showAmount)
+        itemAmount.state = appSettings.showAmount ? 1 : 0
     }
     
-    @IBAction func quitApplication(sender: NSMenuItem) {
-        NSApplication.sharedApplication().terminate(self);
+    @IBAction func quitApplication(_ sender: NSMenuItem) {
+        NSApplication.shared().terminate(self);
     }
 }
 
